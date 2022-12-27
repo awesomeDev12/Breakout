@@ -7,6 +7,9 @@ const blockHeight = 20;
 const userWidth = 100;
 const userHeight = 20;
 
+const leftBtn = document.querySelector('#left-btn');
+const rightBtn = document.querySelector('#right-btn');
+
 const userStart = [gridWidth / 2 - userWidth / 2, 10];
 let userPos = userStart;
 function drawUser() {
@@ -81,6 +84,14 @@ function moveRight() {
         drawUser();
     }
 }
+
+leftBtn.addEventListener('pointerdown', (e) => {
+    moveLeft();
+});
+
+rightBtn.addEventListener('pointerdown', (e) => {
+    moveRight();
+});
 
 const ball = document.createElement('div');
 ball.classList.add('ball');

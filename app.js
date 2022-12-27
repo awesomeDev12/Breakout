@@ -64,6 +64,11 @@ document.addEventListener('keydown', (e) => {
         // console.log('ArrowRight');
         moveRight();
     }
+
+    //purely for debugging remove later
+    if (e.key == 'k') {
+        clearInterval(timerBall);
+    }
 });
 
 const dash = 15;
@@ -98,6 +103,7 @@ ball.classList.add('ball');
 grid.appendChild(ball);
 const ballStart = [30, 30];
 const ballPos = ballStart;
+const diameter = 10;
 
 function drawBall() {
     ball.style.left = ballPos[0] + 'px';
@@ -105,3 +111,40 @@ function drawBall() {
 }
 
 drawBall();
+
+let xDir = 2;
+let yDir = 2;
+
+function moveBall() {
+    console.log(ballPos);
+
+    ballPos[0] += xDir;
+    ballPos[1] += yDir;
+    drawBall();
+    checkForCollisions();
+
+    console.log(ballPos);
+}
+
+function checkForCollisions() {
+    //check for Wall collisions
+    if (ballPos[0] >= gridWidth - diameter) {
+        //hits right wall
+        xDir = -2;
+    } else if (ballPos[1] >= gridHeight - diameter) {
+        //hits top wall
+        yDir = -2;
+    } else if (ballPos[0] <= 0 + diameter) {
+        //hits left wall
+        xDir = +2;
+    } else if (ballPos[1] <= 0 + diameter) {
+        //hits bottom wall
+        yDir = +2;
+        //console.log('Collision');
+    }
+}
+
+// function changeDirection() {
+//for collision with walls
+//}
+timerBall = setInterval(moveBall, 5);
